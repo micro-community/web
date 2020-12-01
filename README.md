@@ -1,4 +1,4 @@
-# Micro
+# Micro Web
 
 Highly experimental project with loads of cruft.
 Please ignore this folder for now.
