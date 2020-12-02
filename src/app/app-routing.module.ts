@@ -9,12 +9,12 @@ import { NotInvitedComponent } from "./not-invited/not-invited.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { EventsComponent } from "./events/events.component";
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
   {
-    path: "",
-    component: WelcomeComponent,
-    pathMatch: "full",
+    path: '',
+    component: LoginComponent,
   },
   {
     path: "not-invited",
@@ -52,6 +52,7 @@ const routes: Routes = [
   },
   { path: "services", component: ServicesComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
 ];
 
 @NgModule({

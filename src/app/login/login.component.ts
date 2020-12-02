@@ -11,10 +11,13 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
   email: string = "";
   password: string = "";
+  namespace: string = "micro";
 
   constructor(private us: UserService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.namespace = this.us.namespace();
+  }
 
   public githubLogin(event: any) {
     this.us.logout();
@@ -23,8 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.us.login(this.email, this.password).then(() => {
-      this.router.navigate(["/services"]);
+    this.us.login(this.email, this.password, this.namespace).then(() => {
+      document.location.href = "/services";
     });
     return false;
   }
