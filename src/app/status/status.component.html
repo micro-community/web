@@ -1,17 +1,7 @@
 <div style="margin: auto">
   <mat-card style="margin-top: 0em; padding-top: 0em" class="mat-card-flat">
     <mat-card-title>
-      <a routerLink="/services">Services</a>
-      &nbsp;
-      <button
-        class="new-button"
-        routerLink="/service/new"
-        mat-raised-button
-        color="primary"
-        aria-label="Add new service"
-      >
-        <b style="font-weight: 700">New</b>
-      </button>
+      <a routerLink="/status">Status</a>
     </mat-card-title>
     <form class="example-form">
       <mat-form-field class="example-full-width">
@@ -34,21 +24,27 @@
     <ng-container *ngIf="services">
       <mat-card
         class="mat-card-flat"
-        *ngFor="let service of services | keyvalue | search: 'key':query"
+        *ngFor="let service of services | search:'name':query"
         style="margin-bottom: 1em; background: #fcfcfc"
       >
         <mat-card-title
           style="display: flex; align-items: center; font-size: 1.25em"
         >
-          &nbsp;<a href="#" routerLink="/service/{{ service.key }}">{{
-            service.key
-          }}</a
+          <mat-icon [style.color]="hasError(service) ? 'red' : 'green'"
+            >fiber_manual_record</mat-icon
+          >
+          &nbsp;<a
+            href="#"
+            routerLink="/status/{{ service.name }}/{{ service.version }}"
+            >{{ service.name }}</a
           >&nbsp;&nbsp;
           <mat-chip-list aria-label="Versions">
-            <mat-chip *ngFor="let serv of service.value">{{
-              serv.version
-            }}</mat-chip>
+            <mat-chip>{{ service.version }}</mat-chip>
           </mat-chip-list>
+          <span style="color: grey; font-size: 0.75em">
+            &nbsp; started {{ service.metadata.started | timeago }} by
+            {{ service.metadata.owner }}
+          </span>
         </mat-card-title>
       </mat-card>
       <br />&nbsp;
