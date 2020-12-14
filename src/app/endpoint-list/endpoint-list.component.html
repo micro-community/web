@@ -1,20 +1,18 @@
 <ng-container *ngIf="service">
   <div>
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-      <mat-card fxFlex="0 1 25%" style="background: #fcfcfc">
-        <mat-toolbar style="background: none">
-          <mat-toolbar-row
-            style="font-size: 0.8em; cursor: pointer; background: none"
-            color="primary"
+      <mat-card fxFlex="0 1 25%">
+        <mat-action-list>
+          <button mat-list-item
+            style="cursor: pointer; font-weight: normal;"
             (click)="select(e)"
             *ngFor="let e of service.endpoints"
           >
-            <span
-              ><span *ngIf="e.name == selectedEndpoint">>&nbsp;</span
-              >{{ e.name }}</span
-            >
-          </mat-toolbar-row>
-        </mat-toolbar>
+            <span *ngIf="e.name == selectedEndpoint; else normal" style="font-weight: bold;"
+            >{{ e.name }}</span>
+            <ng-template #normal><span>{{ e.name }}</span></ng-template>
+          </button>
+        </mat-action-list>
       </mat-card>
 
       <mat-tab-group fxFlex="0 1 70%" *ngIf="endpoint" animationDuration="0ms">
@@ -43,7 +41,7 @@
               (click)="callEndpointForm(service, endpoint)"
               color="primary"
             >
-              Call
+              Submit
             </button>
             <br />
             <br />
