@@ -29,6 +29,7 @@ export class SnippetComponent implements OnInit {
   open() {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: "90%",
+      maxWidth: "750px",
       data: {
         src: this.src,
         fullsrc: this.fullsrc,

@@ -50,6 +50,12 @@ export class EndpointListComponent implements OnInit {
       s.endpoints.forEach((endpoint) => {
         endpoint.requestJSON = this.valueToJson(endpoint.request, 1);
         endpoint.requestValue = JSON.parse(endpoint.requestJSON);
+
+	// delete the cruft fro the value;
+        endpoint.requestValue = this.deleteProtoCruft(JSON.parse(endpoint.requestJSON));
+
+        // rebuild the request JSON value
+        endpoint.requestJSON = JSON.stringify(endpoint.requestValue, null, 4);
       });
       this.service = s;
       if (!this.selectedEndpoint) {
@@ -132,6 +138,28 @@ export class EndpointListComponent implements OnInit {
       });
   }
 
+  deleteProtoCruft(value: Object): Object {
+    // super hack to remove protocruft
+    for (const key in value) {
+      if (key == "MessageState") {
+        delete value.MessageState;
+      } else if (key == "int32") {
+        delete value.int32;
+      } else if (key == "unknownFields") {
+        delete value.unknownFields;
+      }
+    };
+
+    return value;
+  }
+
+  formatValue(value: unknown): string {
+    if (typeof value === "object") {
+      return JSON.stringify(this.deleteProtoCruft(value));
+    }
+    return value;
+  }
+
   formatEndpoint(service: string, endpoint: string): string {
     var parts = endpoint.split(".", -1);
 
@@ -155,8 +183,16 @@ export class EndpointListComponent implements OnInit {
   valueToString(input: types.Value, indentLevel: number): string {
     if (!input) return "";
 
+    if (input.name == "MessageState") {
+       return "";
+    } else if (input.name == "int32") {
+       return "";
+    } else if (input.name == "unknownFields") {
+       return "";
+    }
+
     const indent = Array(indentLevel).join("    ");
-    const fieldSeparator = `,\n`;
+    const fieldSeparator = `\n`;
 
     if (input.values) {
       return `${indentLevel == 1 ? "" : indent}${
@@ -164,7 +200,7 @@ export class EndpointListComponent implements OnInit {
       } ${indentLevel == 1 ? "" : input.name} {
 ${input.values
   .map((field) => this.valueToString(field, indentLevel + 1))
-  .join(fieldSeparator)}
+  .filter(Boolean).join(fieldSeparator)}
 ${indent}}`;
     } else if (indentLevel == 1) {
       return `{}`;
