@@ -26,11 +26,11 @@
               *ngFor="let field of endpoint.requestValue | keyvalue; trackBy: trackByFn"
               appearance="legacy"
             >
-              <mat-label>{{ field.key }}</mat-label>
+              <mat-label>{{ field.key | titlecase }}</mat-label>
               <input
                 matInput
                 ngModelOptions="{standalone: true}"
-                [(ngModel)]="endpoint.requestValue[field.key]"
+                value="{{ formatValue(endpoint.requestValue[field.key]) }}"
                 type="text"
               />
             </mat-form-field>
