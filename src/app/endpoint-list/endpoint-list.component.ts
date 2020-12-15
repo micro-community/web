@@ -139,7 +139,7 @@ export class EndpointListComponent implements OnInit {
       return "/" + service + "/" + parts[1];
     }
 
-    return "/" + service + "/" + endpoint.replace(".", "/", -1);
+    return "/" + service + "/" + endpoint.replace(".", "/");
   }
 
   formatName(name: string): string {
