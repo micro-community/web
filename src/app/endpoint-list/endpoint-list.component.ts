@@ -132,6 +132,15 @@ export class EndpointListComponent implements OnInit {
       });
   }
 
+  formatName(name: string): string {
+    if (name === "") {
+      return "";
+    }
+
+    var newName = name.split(".", -1);
+    return newName.join(" | ");
+  }
+
   valueToString(input: types.Value, indentLevel: number): string {
     if (!input) return "";
 

@@ -9,8 +9,8 @@
             *ngFor="let e of service.endpoints"
           >
             <span *ngIf="e.name == selectedEndpoint; else normal" style="font-weight: bold;"
-            >{{ e.name }}</span>
-            <ng-template #normal><span>{{ e.name }}</span></ng-template>
+            >{{ formatName(e.name) }}</span>
+            <ng-template #normal><span>{{ formatName(e.name) }}</span></ng-template>
           </button>
         </mat-action-list>
       </mat-card>
