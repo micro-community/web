@@ -130,8 +130,8 @@ export class RuntimeService {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({
         service: service,
-        stream: true,
-        count: 0,
+        stream: false,
+        count: 100,
         options: {
           namespace: this.us.namespace(),
         },

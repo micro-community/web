@@ -17,7 +17,7 @@ export class LogsComponent implements OnInit {
     // todo this is a disgusting hack and we need to find something better
     setTimeout(() => {
       this.scrollToBottom();
-    }, 500);
+    }, 5000);
   }
 
   ngOnChange() {}
