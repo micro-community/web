@@ -147,22 +147,6 @@
         </div>
       </mat-tab>
       <mat-tab label="Logs">
-    <div fxLayout="row wrap" fxLayoutAlign="space-between">
-      <div
-        fxFlex="0 1 calc(33% - 1em)"
-        fxFlex.lt-md="0 1 calc(50% - 1em)"
-        fxFlex.lt-sm="0 1 100%"
-      >
-      </div>
-      <app-snippet
-        style="overflow: hidden; height: 4em; border-radius: 5px"
-        fxFlex="0 1 calc(33% - 1em)"
-        fxFlex.lt-md="0 1 calc(50% - 1em)"
-        fxFlex.lt-sm="0 1 100%"
-        src="micro logs {{ serviceName }}"
-        fullsrc="micro logs {{ serviceName }}"
-      ></app-snippet>
-    </div>
         <app-logs [log]="log"></app-logs>
       </mat-tab>
       <!-- <mat-tab label="Stats">
