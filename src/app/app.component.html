@@ -55,6 +55,16 @@
             />
             <span style="font-weight: 700">{{ user.teamName }}</span>
           </button>
+          <span style="font-size: small; display: block; padding: 5px 15px 5px 15px; color: grey;">Namespaces</span>
+          <button
+            class="namespace"
+            id="namespace"
+            mat-flat-button
+            style="font-weight: 800; cursor: arrow;"
+          >
+            {{ us.namespace() }}
+          </button>
+          <mat-divider></mat-divider>
           <button
             class="tokens"
             id="tokens"
