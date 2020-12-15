@@ -153,7 +153,7 @@ export class EndpointListComponent implements OnInit {
     return value;
   }
 
-  formatValue(value: unknown): string {
+  formatValue(value: unknown): any {
     if (typeof value === "object") {
       return JSON.stringify(this.deleteProtoCruft(value));
     }
