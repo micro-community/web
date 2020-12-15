@@ -19,8 +19,10 @@
         >
         <a *ngIf="user && user.name" routerLink="/status" mat-button>Status</a>
         <!--<a *ngIf="user && user.name" routerLink="/events" mat-button>Events</a> -->
-        &nbsp; &nbsp;
-        <button mat-stroked-button color="primary" [matMenuTriggerFor]="new" aria-label="Example icon-button with a menu">
+        &nbsp;
+        <button mat-stroked-button color="primary" [matMenuTriggerFor]="new" aria-label="Example icon-button with a menu"
+          style="padding: 0; width: 40px; min-width: 40px"
+        >
           <mat-icon>add</mat-icon>
         </button>
 
