@@ -142,11 +142,11 @@ export class EndpointListComponent implements OnInit {
     // super hack to remove protocruft
     for (const key in value) {
       if (key == "MessageState") {
-        delete value.MessageState;
+        delete value["MessageState"];
       } else if (key == "int32") {
-        delete value.int32;
+        delete value["int32"];
       } else if (key == "unknownFields") {
-        delete value.unknownFields;
+        delete value["unknownFields"];
       }
     };
 
