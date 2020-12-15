@@ -132,6 +132,16 @@ export class EndpointListComponent implements OnInit {
       });
   }
 
+  formatEndpoint(service: string, endpoint: string): string {
+    var parts = endpoint.split(".", -1);
+
+    if (parts[0].toLowerCase() === service) {
+      return "/" + service + "/" + parts[1];
+    }
+
+    return "/" + service + "/" + endpoint.replace(".", "/", -1);
+  }
+
   formatName(name: string): string {
     if (name === "") {
       return "";

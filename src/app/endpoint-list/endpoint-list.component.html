@@ -60,7 +60,7 @@
           <ng-template matTabContent>
             <br />
              <span class="url"
-                >POST </span> /{{ service.name }}/{{ endpoint.name }}
+                >POST </span> {{ formatEndpoint(service.name, endpoint.name) }}
             <br /><br />
             Request<br /><br />
             <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
