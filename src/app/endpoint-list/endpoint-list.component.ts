@@ -137,8 +137,8 @@ export class EndpointListComponent implements OnInit {
       return "";
     }
 
-    var newName = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
-    newName = newName.split(".", -1);
+    name = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+    var newName = newName.split(".", -1);
     return newName.join(" | ");
   }
 
