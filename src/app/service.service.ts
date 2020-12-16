@@ -20,6 +20,10 @@ export interface RPCRequest {
 export class ServiceService {
   constructor(private us: UserService, private http: HttpClient) {}
 
+  url(): string {
+    return environment.apiUrl
+  }
+
   stats(service: string, version?: string): Promise<types.DebugSnapshot> {
     return new Promise<types.DebugSnapshot>((resolve, reject) => {
       return this.http

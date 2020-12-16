@@ -65,6 +65,10 @@ export class EndpointListComponent implements OnInit {
     });
   }
 
+  apiURL(): string {
+    return this.ses.url();
+  }
+
   columns(endpoint: types.Endpoint): Columns[] {
     return Object.keys(endpoint.responseValue[0]).map((k) => {
       return { key: k, title: k };
