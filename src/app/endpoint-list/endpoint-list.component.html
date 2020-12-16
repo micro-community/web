@@ -1,10 +1,10 @@
 <ng-container *ngIf="service">
   <div>
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
-      <mat-card fxFlex="0 1 25%">
-        <mat-action-list>
+      <mat-card fxFlex="0 1 25%" style="border: none; box-shadow: none;">
+        <mat-action-list style="border: 1px solid #eee">
           <button mat-list-item
-            style="cursor: pointer; font-weight: normal;"
+            style="cursor: pointer; font-weight: normal; border-top: 1px solid whitesmoke;"
             (click)="select(e)"
             *ngFor="let e of service.endpoints"
           >
@@ -14,7 +14,7 @@
           </button>
         </mat-action-list>
       </mat-card>
-
+      <mat-divider [vertical]="true"></mat-divider>
       <mat-tab-group fxFlex="0 1 70%" *ngIf="endpoint" animationDuration="0ms">
         <mat-tab label="Form">
           <ng-template matTabContent>
