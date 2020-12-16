@@ -21,6 +21,7 @@
         <!--<a *ngIf="user && user.name" routerLink="/events" mat-button>Events</a> -->
         &nbsp;
         <button mat-stroked-button color="primary" [matMenuTriggerFor]="new" aria-label="Example icon-button with a menu"
+          *ngIf="user && user.name"
           style="padding: 0; width: 40px; min-width: 40px"
         >
           <mat-icon>add</mat-icon>
@@ -37,6 +38,7 @@
           </button>
 
           <button
+            *ngIf="user && user.name"
             mat-menu-item
             disabled
            >
