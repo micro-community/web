@@ -59,15 +59,23 @@
         <mat-tab label="API">
           <ng-template matTabContent>
             <br />
-             <span class="url"
-                >POST </span> {{ formatEndpoint(service.name, endpoint.name) }}
-            <br /><br />
-            Request<br /><br />
+            <div style="background: whitesmoke; border: 2px solid #eee; border-radius: 5px; padding: 10px;">
+             <span class="url" style="padding: 5px 15px 5px 15px; font-size: 0.8em; font-weight: bold;"
+                >POST </span>&nbsp;
+                <span style="font-weight: bold;">{{ formatEndpoint(service.name, endpoint.name) }}</span>
+            </div>
+            <br />
+            <div>Base URL: {{ apiURL() }}</div>
+            <div>Content-Type: "application/json"</div>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            Request<br/><br/>
             <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
               valueToString(endpoint.request, 1)
             }}</pre>
             <br /><br />
-            Response<br /><br />
+            Response
             <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
               valueToString(endpoint.response, 1)
             }}</pre>
