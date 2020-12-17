@@ -218,7 +218,7 @@ ${indent}}`;
       return `{}`;
     }
 
-    return `${indent}${input.type} ${input.name}`;
+    return `${indent}${input.name} ${input.type}`;
   }
 
   // This is admittedly a horrible temporary implementation
