@@ -16,6 +16,32 @@
       </mat-card>
       <mat-divider [vertical]="true"></mat-divider>
       <mat-tab-group fxFlex="0 1 70%" *ngIf="endpoint" animationDuration="0ms">
+        <mat-tab label="API">
+          <ng-template matTabContent>
+            <br />
+            <div style="background: whitesmoke; border: 2px solid #eee; border-radius: 5px; padding: 10px;">
+             <span class="url" style="padding: 5px 15px 5px 15px; font-size: 0.8em; font-weight: bold;"
+                >POST </span>&nbsp;
+                <span style="font-weight: bold;">{{ formatEndpoint(service.name, endpoint.name) }}</span>
+            </div>
+            <br />
+            <div>Base URL: {{ apiURL() }}</div>
+            <div>Content-Type: "application/json"</div>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            Request<br/><br/>
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
+              valueToString(endpoint.request, 1)
+            }}</pre>
+            <br /><br />
+            Response
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
+              valueToString(endpoint.response, 1)
+            }}</pre>
+          </ng-template>
+        </mat-tab>
+
         <mat-tab label="Form">
           <ng-template matTabContent>
             <br />
@@ -53,32 +79,6 @@
               >
               </ngx-table>
             </div>
-          </ng-template>
-        </mat-tab>
-
-        <mat-tab label="API">
-          <ng-template matTabContent>
-            <br />
-            <div style="background: whitesmoke; border: 2px solid #eee; border-radius: 5px; padding: 10px;">
-             <span class="url" style="padding: 5px 15px 5px 15px; font-size: 0.8em; font-weight: bold;"
-                >POST </span>&nbsp;
-                <span style="font-weight: bold;">{{ formatEndpoint(service.name, endpoint.name) }}</span>
-            </div>
-            <br />
-            <div>Base URL: {{ apiURL() }}</div>
-            <div>Content-Type: "application/json"</div>
-            <br />
-            <mat-divider></mat-divider>
-            <br />
-            Request<br/><br/>
-            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
-              valueToString(endpoint.request, 1)
-            }}</pre>
-            <br /><br />
-            Response
-            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
-              valueToString(endpoint.response, 1)
-            }}</pre>
           </ng-template>
         </mat-tab>
 
