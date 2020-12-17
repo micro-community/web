@@ -3,6 +3,7 @@
     <div fxLayout="row wrap" fxLayoutAlign="space-between">
       <mat-card fxFlex="0 1 25%" style="border: none; box-shadow: none;">
         <mat-action-list style="border: 1px solid #eee">
+          <span mat-list-item style="font-size: 1.2em; padding: 10px;">&nbsp;&nbsp;</span>
           <button mat-list-item
             style="cursor: pointer; font-weight: normal; border-top: 1px solid whitesmoke;"
             (click)="select(e)"
@@ -124,7 +125,7 @@ Micro-Namespace: "{{ namespace() }}"</pre>
             <br />
             <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
               <div fxFlex="calc(100% - 0.5em)">
-                Code<br /><br />
+                Javascript<br /><br />
                 <textarea
                   style="height: 20em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: whitesmoke; background: #333333"
                 >
