@@ -111,6 +111,7 @@ export class EndpointListComponent implements OnInit {
     Object.keys(obj).forEach(
       (k) => !obj[k] && obj[k] !== undefined && delete obj[k]
     );
+    console.log(obj);
     this.ses
       .call({
         endpoint: endpoint.name,
@@ -229,7 +230,7 @@ export class EndpointListComponent implements OnInit {
     const typeToDefault = (type: string): string => {
       switch (type) {
         case "string":
-          return '"string"';
+          return '""';
         case "int":
         case "int32":
         case "int64":
