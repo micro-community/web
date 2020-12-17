@@ -51,10 +51,11 @@
         *ngIf="!services"
       ></mat-spinner>
     </div> -->
-    <div *ngIf="!services">
-      No services found. Maybe create a
-      <a routerLink="/service/new">new one?</a>
-    </div>
+    <mat-card *ngIf="!services" style="width: 300px;">
+      <mat-card-title>Get Started</mat-card-title>
+      <mat-card-subtitle>Create a new service in one click</mat-card-subtitle>
+      <button mat-stroked-button routerLink="/service/new" style="height: 300px; width: 300px;"><span style="font-size: 3em; padding: 20px;">+</span></button>
+    </mat-card>
     <ng-container *ngIf="services">
       <mat-card
         routerLink="/service/{{ service.key }}"
