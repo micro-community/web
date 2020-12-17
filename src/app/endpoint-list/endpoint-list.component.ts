@@ -203,18 +203,25 @@ export class EndpointListComponent implements OnInit {
        return "";
     }
 
-    const indent = Array(indentLevel).join("    ");
-    const fieldSeparator = `\n`;
+    const indent = Array(indentLevel).join("\t");
+    const fieldSeparator = `\n\t`;
 
     if (input.values) {
-      return `${indentLevel == 1 ? "" : indent}${
-        indentLevel == 1 ? "" : input.type
-      } ${indentLevel == 1 ? "" : input.name} {
-${input.values
-  .map((field) => this.valueToString(field, indentLevel + 1))
-  .filter(Boolean).join(fieldSeparator)}
-${indent}}`;
-    } else if (indentLevel == 1) {
+      var vals = input.values
+        .map((field) => this.valueToString(field, indentLevel + 1))
+          .filter(Boolean).join(fieldSeparator);
+
+      if (indentLevel == 0) {
+        if (vals.trim().length == 0) {
+          return "{}";
+        }
+        return "{\n\t" + vals + "\n}";
+      }
+
+      return `${indentLevel == 0 ? "" : indent}${
+        indentLevel == 0 ? "" : input.type
+      } ${indentLevel == 0 ? "" : input.name} {\n\t${vals}\n\t${indent}}`;
+    } else if (indentLevel == 0) {
       return `{}`;
     }
 
