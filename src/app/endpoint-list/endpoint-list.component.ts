@@ -188,6 +188,10 @@ export class EndpointListComponent implements OnInit {
     return newName.join(" | ");
   }
 
+  scriptJS(service: string, endpoint: string): string {
+    
+  }
+
   valueToString(input: types.Value, indentLevel: number): string {
     if (!input) return "";
 

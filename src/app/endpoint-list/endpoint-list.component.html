@@ -118,6 +118,39 @@ Micro-Namespace: "{{ namespace() }}"</pre>
             </button>
           </ng-template>
         </mat-tab>
+
+        <mat-tab label="Script" disabled>
+          <ng-template matTabContent>
+            <br />
+            <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
+              <div fxFlex="calc(100% - 0.5em)">
+                Code<br /><br />
+                <textarea
+                  style="height: 20em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: whitesmoke; background: #333333"
+                >
+Coming soon...
+               </textarea>
+              </div>
+            </div>
+            <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
+              <div fxFlex="calc(100% - 0.5em)">
+                Result<br /><br />
+                <textarea style="height: 10em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: whitesmoke; background: #333333"
+                  [(ngModel)]="endpoint.responseJSON"
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              style="font-weight: bold"
+              (click)="callEndpoint(service, endpoint)"
+              color="primary"
+            >
+              Exec
+            </button>
+          </ng-template>
+        </mat-tab>
       </mat-tab-group>
     </div>
     <br />
