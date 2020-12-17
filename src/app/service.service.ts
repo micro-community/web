@@ -24,6 +24,10 @@ export class ServiceService {
     return environment.apiUrl
   }
 
+  namespace(): string {
+    return this.us.namespace();
+  }
+
   stats(service: string, version?: string): Promise<types.DebugSnapshot> {
     return new Promise<types.DebugSnapshot>((resolve, reject) => {
       return this.http

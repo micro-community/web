@@ -69,6 +69,10 @@ export class EndpointListComponent implements OnInit {
     return this.ses.url();
   }
 
+  namespace(): string {
+    return this.ses.namespace();
+  }
+
   columns(endpoint: types.Endpoint): Columns[] {
     return Object.keys(endpoint.responseValue[0]).map((k) => {
       return { key: k, title: k };

@@ -25,8 +25,14 @@
                 <span style="font-weight: bold;">{{ formatEndpoint(service.name, endpoint.name) }}</span>
             </div>
             <br />
-            <div>Base URL: {{ apiURL() }}</div>
-            <div>Content-Type: "application/json"</div>
+            <div><span style="font-weight: bold">URL:</span> {{ apiURL() }}</div>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            Headers<br/><br/>
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">
+Content-Type: "application/json"
+Micro-Namespace: "{{ namespace() }}"</pre>
             <br />
             <mat-divider></mat-divider>
             <br />
