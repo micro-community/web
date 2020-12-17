@@ -21,7 +21,7 @@ export class NewServiceComponent implements OnInit {
   serviceInput = new FormControl("", [Validators.required]);
   @ViewChild("sinput", { static: false }) sinput: ElementRef;
 
-  source = "github.com/micro/services/helloworld";
+  source = "";
   serviceName = "";
   deploying = false;
 
