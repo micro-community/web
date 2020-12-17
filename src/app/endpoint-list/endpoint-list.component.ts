@@ -218,7 +218,7 @@ ${indent}}`;
     const typeToDefault = (type: string): string => {
       switch (type) {
         case "string":
-          return '""';
+          return '"string"';
         case "int":
         case "int32":
         case "int64":
