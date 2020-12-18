@@ -30,7 +30,7 @@
       [selectedIndex]="selected"
       (selectedIndexChange)="tabChange($event)"
     >
-      <mat-tab style="padding-top: 1em" label="Admin">
+      <mat-tab style="padding-top: 1em" label="Admin" *ngIf="services[0].endpoints">
         <br />
         <app-endpoint-list
           [serviceName]="services[0].name"
