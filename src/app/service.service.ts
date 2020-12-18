@@ -4,7 +4,6 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../environments/environment";
 import { UserService } from "./user.service";
 import * as _ from "lodash";
-import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 
 export interface RPCRequest {
@@ -15,84 +14,18 @@ export interface RPCRequest {
   request: any;
 }
 
-export interface ServicesResponse {
-  services: types.Service[];
-}
-
 @Injectable({
   providedIn: "root",
 })
 export class ServiceService {
   constructor(private us: UserService, private http: HttpClient) {}
 
-  list(): Promise<types.Service[]> {
-    return new Promise<types.Service[]>((resolve, reject) => {
-      return this.http
-        .get<ServicesResponse>(environment.apiUrl + "/runtime/read", {
-          headers: {
-            authorization: this.us.token(),
-            "micro-namespace": "micro",
-          },
-        })
-        .toPromise()
-        .then((servs) => {
-          resolve(servs.services as types.Service[]);
-        })
-        .catch((e) => {
-          reject(e);
-        });
-    });
+  url(): string {
+    return environment.apiUrl
   }
 
-  get(serviceName: string): Promise<types.Service> {
-    return new Promise<types.Service>((resolve, reject) => {
-      return this.http
-        .post<ServicesResponse>(
-          environment.apiUrl + "/registry/getService",
-          {
-            service: serviceName,
-          },
-          {
-            headers: {
-              authorization: this.us.token(),
-            },
-          }
-        )
-        .toPromise()
-        .then((servs) => {
-          resolve(servs.services[0] as types.Service);
-        })
-        .catch((e) => {
-          reject(e);
-        });
-    });
-  }
-
-  logs(service: string): Observable<types.LogRecord> {
-    return this.http
-      .post<types.LogRecord>(
-        environment.apiUrl + "/runtime/logs",
-        {
-          service: service,
-          stream: true,
-          options: {
-            namespace: "micro",
-          },
-        },
-        {
-          headers: {
-            authorization: this.us.token(),
-            "micro-namespace": "micro",
-          },
-        }
-      )
-
-    //.then((servs) => {
-    //  resolve(servs as types.LogRecord[]);
-    //})
-    //.catch((e) => {
-    //  reject(e);
-    //});
+  namespace(): string {
+    return this.us.namespace();
   }
 
   stats(service: string, version?: string): Promise<types.DebugSnapshot> {
@@ -104,7 +37,7 @@ export class ServiceService {
           {
             headers: {
               authorization: this.us.token(),
-              "micro-namespace": "micro",
+              "micro-namespace": this.us.namespace(),
             },
           }
         )
@@ -159,7 +92,7 @@ export class ServiceService {
           {
             headers: {
               authorization: this.us.token(),
-              "micro-namespace": "micro",
+              "micro-namespace": this.us.namespace(),
             },
           }
         )

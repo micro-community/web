@@ -9,12 +9,19 @@ import { NotInvitedComponent } from "./not-invited/not-invited.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { EventsComponent } from "./events/events.component";
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { StatusComponent } from "./status/status.component";
+import { StatusSingleComponent } from "./status-single/status-single.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: WelcomeComponent,
+    redirectTo: "services",
     pathMatch: "full",
+  },
+  {
+    path: "status",
+    component: StatusComponent,
   },
   {
     path: "not-invited",
@@ -30,9 +37,20 @@ const routes: Routes = [
     component: NewServiceComponent,
     canActivate: [AuthGuard],
   },
+
   {
     path: "service/:id/:tab",
     component: ServiceComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "status/:id/:version",
+    component: StatusSingleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "status/:id/:version/:tab",
+    component: StatusSingleComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -52,6 +70,7 @@ const routes: Routes = [
   },
   { path: "services", component: ServicesComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
 ];
 
 @NgModule({

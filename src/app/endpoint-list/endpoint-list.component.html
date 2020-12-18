@@ -1,76 +1,158 @@
-<form style="margin-left: 1.5em" class="example-form">
-  <mat-form-field class="example-full-width">
-    <input
-      name="query"
-      matInput
-      [(ngModel)]="endpointQuery"
-      placeholder="Search endpoints"
-    />
-  </mat-form-field>
-</form>
 <ng-container *ngIf="service">
-  <div
-    
-    *ngFor="let endpoint of service.endpoints | search: 'name':endpointQuery"
-  >
-    <div>
-      <mat-expansion-panel class="mat-elevation-z0">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ endpoint.name }}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{ endpoint.title }}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-tab-group animationDuration="0ms">
-          <mat-tab label="Definition">
-            <ng-template matTabContent>
-              <br /><br />
-              Request<br /><br />
-              <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
-                valueToString(endpoint.request, 1)
-              }}</pre>
-              <br /><br />
-              Response<br /><br />
-              <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
-                valueToString(endpoint.response, 1)
-              }}</pre>
-            </ng-template>
-          </mat-tab>
-          <mat-tab label="Call">
-            <ng-template matTabContent>
-              <br />
-              <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
-                <div fxFlex="calc(50% - 0.5em)">
-                  Request<br /><br />
-                  <ngx-monaco-editor
-                    style="height: 25em"
-                    [options]="coptions"
-                    [(ngModel)]="endpoint.requestJSON"
-                  ></ngx-monaco-editor>
-                </div>
-                <div fxFlex="calc(50% - 0.5em)">
-                  Response<br /><br />
-                  <ngx-monaco-editor
-                    style="height: 25em"
-                    [options]="coptions"
-                    [(ngModel)]="endpoint.responseJSON"
-                  ></ngx-monaco-editor>
-                </div>
-              </div>
-              <br />
-              <button
-                mat-raised-button
-                (click)="callEndpoint(service, endpoint)"
-                color="primary"
+  <div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+      <mat-card fxFlex="0 1 25%" style="border: none; box-shadow: none;">
+        <mat-action-list style="border: 1px solid #eee">
+          <span mat-list-item style="font-size: 1.2em; padding: 10px;">&nbsp;&nbsp;</span>
+          <button mat-list-item
+            style="cursor: pointer; font-weight: normal; border-top: 1px solid whitesmoke;"
+            (click)="select(e)"
+            *ngFor="let e of service.endpoints"
+          >
+            <span *ngIf="e.name == selectedEndpoint; else normal" style="font-weight: bold;"
+            >{{ formatName(e.name) }}</span>
+            <ng-template #normal><span>{{ formatName(e.name) }}</span></ng-template>
+          </button>
+        </mat-action-list>
+      </mat-card>
+      <mat-divider [vertical]="true"></mat-divider>
+      <mat-tab-group fxFlex="0 1 70%" *ngIf="endpoint" animationDuration="0ms">
+        <mat-tab label="API">
+          <ng-template matTabContent>
+            <br />
+            <div style="background: whitesmoke; border: 2px solid #eee; border-radius: 5px; padding: 10px;">
+             <span class="url" style="padding: 5px 15px 5px 15px; font-size: 0.8em; font-weight: bold;"
+                >POST </span>&nbsp;
+                <span style="font-weight: bold;">{{ formatEndpoint(service.name, endpoint.name) }}</span>
+            </div>
+            <br />
+            <div><span style="font-weight: bold">URL:</span> {{ apiURL() }}</div>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            Headers<br/><br/>
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">
+Content-Type: "application/json"
+Micro-Namespace: "{{ namespace() }}"</pre>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            Request<br/><br/>
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
+              valueToString(endpoint.request, 0)
+            }}</pre>
+            <br /><br />
+            Response
+            <pre class="reqresp" style="padding: 1em; background: #f6f6f6">{{
+              valueToString(endpoint.response, 0)
+            }}</pre>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Form">
+          <ng-template matTabContent>
+            <br />
+
+            <mat-form-field
+              class="full"
+              style="width: 100%"
+              *ngFor="let field of endpoint.requestValue | keyvalue; trackBy: trackByFn"
+              appearance="legacy"
+            >
+              <mat-label>{{ field.key | titlecase }}</mat-label>
+              <input
+                matInput
+                ngModelOptions="{standalone: true}"
+                placeholder="{{ formatValue(endpoint.requestValue[field.key]) }}"
+                type="text"
+              />
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              style="font-weight: bold"
+              (click)="callEndpointForm(service, endpoint)"
+              color="primary"
+            >
+              Submit
+            </button>
+            <br />
+            <br />
+            <div style="background: white" *ngIf="endpoint.responseValue">
+              <ngx-table
+                [data]="endpoint.responseValue"
+                [configuration]="configuration"
+                [columns]="columns(endpoint)"
               >
-                Call
-              </button>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-expansion-panel>
+              </ngx-table>
+            </div>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="JSON">
+          <ng-template matTabContent>
+            <br />
+            <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
+              <div fxFlex="calc(50% - 0.5em)">
+                Request<br /><br />
+                <textarea
+                  style="height: 25em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: #333333;"
+                  [(ngModel)]="endpoint.requestJSON"
+                ></textarea>
+              </div>
+               
+              <div fxFlex="calc(50% - 0.5em)">
+                Response<br /><br />
+                <textarea style="height: 25em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: #333333"
+                  [(ngModel)]="endpoint.responseJSON"
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              style="font-weight: bold"
+              (click)="callEndpoint(service, endpoint)"
+              color="primary"
+            >
+              Call
+            </button>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Script" disabled>
+          <ng-template matTabContent>
+            <br />
+            <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
+              <div fxFlex="calc(100% - 0.5em)">
+                Javascript<br /><br />
+                <textarea
+                  style="height: 20em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: whitesmoke; background: #333333"
+                >
+Coming soon...
+               </textarea>
+              </div>
+            </div>
+            <div fxLayout.lt-md="column" fxLayout="row" fxLayoutGap="1em">
+              <div fxFlex="calc(100% - 0.5em)">
+                Result<br /><br />
+                <textarea style="height: 10em; width: 95%; border: 1px solid whitesmoke; padding: 10px; color: whitesmoke; background: #333333"
+                  [(ngModel)]="endpoint.responseJSON"
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <button
+              mat-raised-button
+              style="font-weight: bold"
+              (click)="callEndpoint(service, endpoint)"
+              color="primary"
+            >
+              Exec
+            </button>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
     <br />
   </div>

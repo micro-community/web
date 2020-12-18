@@ -1,0 +1,21 @@
+<style>
+  .copypastable {
+    padding: 0.5em;
+    background: #444;
+    color: white;
+    border-radius: 5px;
+  }
+</style>
+CLI commands
+<div [innerHTML]="data.fullsrc" class="copypastable"></div>
+<br />Not logged in to the command line?<br />
+<div class="copypastable">
+  # set the environment to platform<br />
+  micro env set platform<br />
+  <br />
+  # set your namespace<br />
+  micro user namespace set {{ data.namespace }}<br />
+  <br />
+  # login with your account<br />
+  micro login --email={{ data.email }}
+</div>

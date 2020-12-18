@@ -12,7 +12,7 @@ import {
   MatToolbar,
   MatList,
   MatMenu,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
 } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -27,19 +27,21 @@ import {
   MatInputModule,
   MatExpansionModule,
   MatProgressBarModule,
-  MatCheckboxModule
+  MatCheckboxModule,
 } from "@angular/material";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatListModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from "./login/login.component";
 import { ServicesComponent } from "./services/services.component";
+import { StatusComponent } from "./status/status.component";
 
 import { CookieService } from "ngx-cookie-service";
 import { UserService } from "./user.service";
 import { HttpClientModule } from "@angular/common/http";
 import { SimpleNotificationsModule } from "angular2-notifications";
 import { ServiceComponent } from "./service/service.component";
+import { StatusSingleComponent } from "./status-single/status-single.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SearchPipe } from "./search.pipe";
 import { NewServiceComponent } from "./new-service/new-service.component";
@@ -63,7 +65,15 @@ import { TraceListComponent } from "./trace-list/trace-list.component";
 import { EndpointListComponent } from "./endpoint-list/endpoint-list.component";
 import { LogsComponent } from "./logs/logs.component";
 import { NodesComponent } from "./nodes/nodes.component";
-
+import { RegisterComponent } from "./register/register.component";
+import { TimeagoModule } from "ngx-timeago";
+import { TitlePipe } from "./title.pipe";
+import {
+  SnippetComponent,
+  DialogOverviewExampleDialog,
+} from "./snippet/snippet.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { TableModule } from "ngx-easy-table";
 /**
  * Import specific languages to avoid importing everything
  * The following will lazy load highlight.js core script (~9.6KB) + the selected languages bundle (each lang. ~1kb)
@@ -73,7 +83,7 @@ export function getHighlightLanguages() {
     typescript: () => import("highlight.js/lib/languages/typescript"),
     css: () => import("highlight.js/lib/languages/css"),
     xml: () => import("highlight.js/lib/languages/xml"),
-    bash: () => import("highlight.js/lib/languages/bash")
+    bash: () => import("highlight.js/lib/languages/bash"),
   };
 }
 
@@ -84,6 +94,7 @@ export function getHighlightLanguages() {
     HomeComponent,
     LoginComponent,
     ServicesComponent,
+    StatusComponent,
     ServiceComponent,
     SearchPipe,
     NewServiceComponent,
@@ -95,10 +106,15 @@ export function getHighlightLanguages() {
     DateAgoPipe,
     EventsListComponent,
     StatChartsComponent,
+    StatusSingleComponent,
     TraceListComponent,
     EndpointListComponent,
     LogsComponent,
-    NodesComponent
+    NodesComponent,
+    RegisterComponent,
+    TitlePipe,
+    SnippetComponent,
+    DialogOverviewExampleDialog,
   ],
   imports: [
     BrowserModule,
@@ -112,7 +128,9 @@ export function getHighlightLanguages() {
     MatListModule,
     FlexLayoutModule,
     MatMenuModule,
+    TimeagoModule.forRoot(),
     HttpClientModule,
+    MatDialogModule,
     SimpleNotificationsModule.forRoot({
       //position: ["top", "right"],
     }),
@@ -131,7 +149,8 @@ export function getHighlightLanguages() {
     Ng2GoogleChartsModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    TableModule,
   ],
   providers: [
     CookieService,
@@ -139,10 +158,11 @@ export function getHighlightLanguages() {
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        languages: getHighlightLanguages()
-      }
-    }
+        languages: getHighlightLanguages(),
+      },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewExampleDialog],
 })
 export class AppModule {}

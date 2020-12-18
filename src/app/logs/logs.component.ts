@@ -4,12 +4,12 @@ import * as types from "../types";
 @Component({
   selector: "app-logs",
   templateUrl: "./logs.component.html",
-  styleUrls: ["./logs.component.css"]
+  styleUrls: ["./logs.component.css"],
 })
 export class LogsComponent implements OnInit {
   @ViewChild("scrollMe", { static: false })
   private myScrollContainer: ElementRef;
-  @Input() logs: types.LogRecord[] = [];
+  @Input() log = "";
 
   constructor() {}
 
@@ -17,7 +17,7 @@ export class LogsComponent implements OnInit {
     // todo this is a disgusting hack and we need to find something better
     setTimeout(() => {
       this.scrollToBottom();
-    }, 500);
+    }, 5000);
   }
 
   ngOnChange() {}

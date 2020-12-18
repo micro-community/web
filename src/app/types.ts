@@ -1,5 +1,3 @@
-
-
 export interface Account {
   id: string;
   type: string;
@@ -25,12 +23,14 @@ export interface Endpoint {
   name: string;
   request: Value;
   response: Value;
-  metadata: Map<string, string>;
+  metadata: Object;
   title: string; // does not exist yet
   description: string; // does not exist yet
   //
   requestJSON: string;
   responseJSON: string;
+  requestValue: any;
+  responseValue: any;
 }
 
 export interface Node {
@@ -39,6 +39,7 @@ export interface Node {
   metadata: Map<string, string>;
   // @TODO come up with a way to wrap all types in conenience interfaces
   show?: boolean;
+  version?: string;
 }
 
 // ... slightly different version of Service...
@@ -57,6 +58,8 @@ export interface Service {
   metadata: Map<string, string>;
   endpoints: Endpoint[];
   nodes: Node[];
+  status: number;
+  source: string;
 }
 
 // taken from https://github.com/micro/micro/blob/master/debug/log/proto/log.proto

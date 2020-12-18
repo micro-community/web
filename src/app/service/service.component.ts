@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ServiceService } from "../service.service";
+import { RegistryService } from "../registry.service";
 import * as types from "../types";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
@@ -54,6 +55,7 @@ export class ServiceComponent implements OnInit {
 
   constructor(
     private ses: ServiceService,
+    private rs: RegistryService,
     private activeRoute: ActivatedRoute,
     private location: Location,
     private notif: NotificationsService
@@ -65,24 +67,13 @@ export class ServiceComponent implements OnInit {
         clearInterval(this.intervalId);
       }
       this.serviceName = <string>p["id"];
-      this.ses.list().then((servs) => {
+      this.rs.list().then((servs) => {
         this.services = servs.filter((s) => s.name == this.serviceName);
         this.selectedVersion =
           this.services.filter((s) => s.version == "latest").length > 0
             ? "latest"
             : this.services[0].version;
       });
-      this.ses
-        .events(this.serviceName)
-        .then((events) => {
-          this.events = events;
-        })
-        .catch((e) => {
-          this.notif.error(
-            "Error listing events",
-            JSON.parse(e.error.error).detail
-          );
-        });
       this.loadVersionData();
       const tab = <string>p["tab"];
       if (tab) {
@@ -91,73 +82,7 @@ export class ServiceComponent implements OnInit {
     });
   }
 
-  loadVersionData() {
-    this.ses
-      .trace(this.serviceName)
-      .then((spans) => {
-        this.traceSpans = spans;
-      })
-      .catch((e) => {
-        this.notif.error(
-          "Error listing trace",
-          JSON.parse(e.error.error).detail
-        );
-      });
-    // stats subscriptions
-    let statsFailure = false;
-    this.intervalId = setInterval(() => {
-      if (this.selected !== 2 || !this.refresh) {
-        return;
-      }
-      this.ses
-        .stats(this.serviceName)
-        .then((stats) => {
-          this.stats = [].concat(this.stats, stats);
-        })
-        .catch((e) => {
-          if (statsFailure) {
-            return;
-          }
-          statsFailure = true;
-          this.notif.error("Error reading stats", e);
-        });
-    }, 2000);
-    this.tabValueChange.subscribe((index) => {
-      if (index !== 2 || !this.refresh) {
-        return;
-      }
-      this.ses
-        .stats(this.serviceName)
-        .then((stats) => {
-          this.stats = [].concat(this.stats, stats);
-        })
-        .catch((e) => {
-          if (statsFailure) {
-            return;
-          }
-          statsFailure = true;
-          this.notif.error("Error reading stats", e);
-        });
-    });
-    // logs subscriptions
-    let logFailure = false;
-
-
-      this.ses.logs(this.serviceName).subscribe((v) => {
-        console.log("obv", v);
-      });
-
-    this.tabValueChange.subscribe((index) => {
-      if (index !== 1 || !this.refreshLogs) {
-        return;
-      }
-      this.ses
-        .logs(this.serviceName)
-        .subscribe((v) => {
-          console.log("obv", v);
-        });
-    });
-  }
+  loadVersionData() {}
 
   versionSelected(service: types.Service) {
     if (this.selectedVersion == service.version) {
