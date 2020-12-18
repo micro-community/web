@@ -40,11 +40,34 @@
     <mat-card-content>
       <div
         ngStyle.lt-md="width: 100%"
-        style="max-width: 600px; margin: 0 auto; margin-bottom: 1em"
+        style="margin: 0 auto; margin-bottom: 1em"
       >
-        <mat-card style="background: #fcfcfc">
-          <mat-card-title>Run a new service</mat-card-title>
-          <mat-card-subtitle>A service will be built and deployed from a git source url</mat-card-subtitle>
+      <div fxLayout="row wrap" fxLayoutAlign="space-around" >
+        <mat-card style="background: #fcfcfc;"
+          fxFlex="0 1 calc(35% - 1em)"
+          fxFlex.lt-md="0 1 calc(100% - 1em)"
+          fxFlex.lt-sm="0 1 100%"
+        >
+          <mat-card-title>Explore</mat-card-title>
+          <mat-card-subtitle>Run from a list of open source Micro services</mat-card-subtitle>
+          <mat-card-content style="width: 300px; margin: 0 auto; text-align: center;">
+            Coming soon...
+            <br><br>
+            <a href="https://github.com/micro/services">
+              <img src="/assets/github.png" />
+            </a>
+            <br><br>See <a href="https://github.com/micro/services">github.com/micro/services</a> for more info.
+          </mat-card-content>
+          <!-- TODO populate list of services from micro/services (name, description, source) -->
+        </mat-card>
+        &nbsp;&nbsp;
+        <mat-card style="background: #fcfcfc;;"
+          fxFlex="0 1 calc(60% - 1em)"
+          fxFlex.lt-md="0 1 calc(100% - 1em)"
+          fxFlex.lt-sm="0 1 100%"
+        >
+          <mat-card-title>Run a service from source</mat-card-title>
+          <mat-card-subtitle>A service will be built and deployed from the git source url</mat-card-subtitle>
           <mat-form-field
             id="new-service-input"
             style="width: 100%; margin-top: 1em"
@@ -70,6 +93,7 @@
             Run
           </button>
         </mat-card>
+      </div>
       </div>
     </mat-card-content>
   </mat-card>
