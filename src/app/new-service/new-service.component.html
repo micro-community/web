@@ -48,7 +48,7 @@
             fxFlex.lt-md="0 1 calc(100% - 1em)"
             fxFlex.lt-sm="0 1 100%"
           >
-            <mat-card-title>Explore Micro Services</mat-card-title>
+            <mat-card-title>Explore | Micro Services</mat-card-title>
             <mat-card-subtitle
               >Run from an existing list of open source Micro
               services</mat-card-subtitle
@@ -58,13 +58,13 @@
               matInput
               [(ngModel)]="query"
               placeholder="Search"
+              style="border-bottom: 2px solid #eee;"
             />
             <br /><br />
-            <mat-card-content style="margin: 0 auto">
+            <mat-card-content style="margin: 0 auto; max-height: 400px; overflow: scroll;">
               <mat-card
                 (click)="select(r)"
                 style="cursor: pointer; margin-bottom: 1em"
-                class="mat-card-flat"
                 *ngFor="
                   let r of runnables | search: 'description,name,title':query
                 "
@@ -72,7 +72,6 @@
                 <mat-card-title>{{ r.title }}</mat-card-title>
                 <mat-card-subtitle>{{ r.source }}</mat-card-subtitle>
                 <div>{{ r.description }}</div>
-                <br /><br />
               </mat-card>
             </mat-card-content>
             <!-- TODO populate list of services from micro/services (name, description, source) -->

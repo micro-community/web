@@ -26,10 +26,16 @@ var runnables: Runnable[] = [
     description: "The only helloworld service you will ever need",
   },
   {
-    title: "Posts - A headless CMS",
+    title: "Posts",
     name: "posts",
     source: "github.com/micro/services/blog/posts",
-    description: "Use this service to embed blog posts on your website",
+    description: "The building block for headless CMS as a service",
+  },
+  {
+    title: "Comments",
+    name: "comments",
+    source: "github.com/micro/services/blog/commands",
+    description: "Add comments to your posts or any website",
   },
 ];
 
