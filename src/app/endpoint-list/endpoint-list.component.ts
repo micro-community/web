@@ -319,12 +319,20 @@ ${indent}}`;
   coptions = {
     automaticLayout: true,
     theme: "vs-light",
+    folding: false,
+    glyphMargin: false,
     language: "json",
     lineNumbers: false,
+    lineDecorationsWidth: 0,
+    lineNumbersMinChars: 0,
     renderLineHighlight: false,
     renderIndentGuides: false,
     minimap: {
       enabled: false,
+    },
+    scrollbar: {
+      vertical: "hidden",
+      horizontal: "hidden",
     },
   };
 
@@ -332,12 +340,20 @@ ${indent}}`;
   htmlOptions = {
     automaticLayout: true,
     theme: "vs-light",
+    folding: false,
+    glyphMargin: false,
     language: "html",
     lineNumbers: false,
+    lineDecorationsWidth: 0,
+    lineNumbersMinChars: 0,
     renderLineHighlight: false,
     renderIndentGuides: false,
     minimap: {
       enabled: false,
+    },
+    scrollbar: {
+      vertical: "hidden",
+      horizontal: "hidden",
     },
   };
 
