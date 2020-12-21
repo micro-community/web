@@ -21,6 +21,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.us.refreshToken() != "") {
+      this.router.navigate(["/services"]);
+      return;
+    }
     this.namespace = this.us.namespace();
   }
 
@@ -37,7 +41,7 @@ export class LoginComponent implements OnInit {
         document.location.href = "/services";
       })
       .catch((e) => {
-        console.log(e)
+        console.log(e);
         this.notif.error(e.error.Detail);
       });
     return false;

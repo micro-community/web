@@ -19,7 +19,12 @@ export class RegisterComponent implements OnInit {
     private us: UserService,
     private router: Router,
     private notif: NotificationsService
-  ) {}
+  ) {
+    if (this.us.refreshToken() != "") {
+      this.router.navigate(["/services"]);
+      return;
+    }
+  }
 
   ngOnInit() {}
 
