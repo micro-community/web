@@ -26,6 +26,12 @@ var runnables: Runnable[] = [
     description: "The only helloworld service you will ever need",
   },
   {
+    title: "Chat",
+    name: "chat",
+    source: "github.com/micro/services/chat",
+    description: "Build messaging with the Chat service as the backend",
+  },
+  {
     title: "Posts",
     name: "posts",
     source: "github.com/micro/services/blog/posts",
@@ -54,6 +60,12 @@ var runnables: Runnable[] = [
     name: "location",
     source: "github.com/micro/services/location",
     description: "Realtime gps and point location tracking and search",
+  },
+  {
+    title: "Messages",
+    name: "messages",
+    source: "github.com/micro/services/messages",
+    description: "Create an inbox for private messages and related discussions",
   },
   {
     title: "Notes",
