@@ -34,8 +34,20 @@ var runnables: Runnable[] = [
   {
     title: "Comments",
     name: "comments",
-    source: "github.com/micro/services/blog/commands",
+    source: "github.com/micro/services/blog/comments",
     description: "Add comments to your posts or any website",
+  },
+  {
+    title: "Location",
+    name: "location",
+    source: "github.com/micro/services/location",
+    description: "Realtime gps and point location tracking and search",
+  },
+  {
+    title: "Users",
+    name: "users",
+    source: "github.com/micro/services/users",
+    description: "Simple user management and authentication",
   },
 ];
 
