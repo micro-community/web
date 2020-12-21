@@ -57,7 +57,7 @@ var runnables: Runnable[] = [
   },
   {
     title: "Notes"
-    name: "notes"
+    name: "notes",
     source: "github.com/micro/services/notes",
     description: "Quick notes, todos and lists all in one place",
   },
