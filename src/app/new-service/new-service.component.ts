@@ -44,6 +44,12 @@ var runnables: Runnable[] = [
     description: "Realtime gps and point location tracking and search",
   },
   {
+    title: "Notes"
+    name: "notes"
+    source: "github.com/micro/services/notes",
+    description: "Quick notes, todos and lists all in one place",
+  },
+  {
     title: "Users",
     name: "users",
     source: "github.com/micro/services/users",
