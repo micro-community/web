@@ -70,14 +70,14 @@ Micro-Namespace: "{{ namespace() }}"</pre
             <br />
             Request<br /><br />
             <ngx-monaco-editor
-              style="height: 25em"
+              style="height: 25em; overflow: hidden;"
               [options]="coptions"
               [(ngModel)]="endpoint.requestJSON"
             ></ngx-monaco-editor>
             <br /><br />
             Response<br /><br />
             <ngx-monaco-editor
-              style="height: 25em"
+              style="height: 25em; overflow: hidden;"
               [options]="coptions"
               [(ngModel)]="endpoint.responseJSON"
             ></ngx-monaco-editor>

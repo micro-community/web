@@ -317,18 +317,29 @@ ${indent}}`;
 
   // code editor
   coptions = {
+    automaticLayout: true,
     theme: "vs-light",
     language: "json",
     lineNumbers: false,
+    renderLineHighlight: false,
+    renderIndentGuides: false,
+    minimap: {
+      enabled: false,
+    },
   };
 
     // code editor
-    htmlOptions = {
-      theme: "vs-light",
-      language: "html",
-      lineNumbers: false,
-      
-    };
+  htmlOptions = {
+    automaticLayout: true,
+    theme: "vs-light",
+    language: "html",
+    lineNumbers: false,
+    renderLineHighlight: false,
+    renderIndentGuides: false,
+    minimap: {
+      enabled: false,
+    },
+  };
 
   pickVersion(services: types.Service[]): types.Service[] {
     return services.filter((s) => {
