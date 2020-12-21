@@ -41,7 +41,13 @@ var runnables: Runnable[] = [
     title: "Feeds",
     name: "feeds",
     source: "github.com/micro/services/blog/feeds",
-    description: "Sync your news and RSS feeds directly into the posts service ",
+    description: "Sync your news and RSS feeds directly into the posts service",
+  },
+  {
+    title: "Tags",
+    name: "tags",
+    source: "github.com/micro/services/blog/tags",
+    description: "Tag your posts so they instantly become grouped and categorised",
   },
   {
     title: "Location",
