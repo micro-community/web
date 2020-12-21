@@ -38,6 +38,12 @@ var runnables: Runnable[] = [
     description: "Add comments to your posts or any website",
   },
   {
+    title: "Feeds",
+    name: "feeds",
+    source: "github.com/micro/services/blog/feeds",
+    description: "Sync your news and RSS feeds directly into the posts service ",
+  },
+  {
     title: "Location",
     name: "location",
     source: "github.com/micro/services/location",
